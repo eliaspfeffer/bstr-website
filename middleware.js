@@ -146,6 +146,17 @@ export default async function middleware(request) {
   const url = new URL(request.url)
   const cookieSecret = process.env.COOKIE_SECRET || ''
 
+  // ── Handle logout ─────────────────────────────────────────────────────────
+  if (url.pathname === '/__logout') {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: '/',
+        'Set-Cookie': 'bstr_auth=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0',
+      },
+    })
+  }
+
   // ── Handle login form POST ────────────────────────────────────────────────
   if (request.method === 'POST' && url.pathname === '/__login') {
     let body = ''

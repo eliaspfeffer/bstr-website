@@ -7,6 +7,13 @@
 <style>
   body { font-family: system-ui, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
   .page { max-width: 1300px; margin: 0 auto; padding: 20px; }
+  .logout-btn {
+    position: fixed; top: 16px; right: 20px; z-index: 999;
+    background: #141414; color: #f0f0f0; border: 1px solid #242424;
+    border-radius: 8px; padding: 8px 16px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: background 0.15s;
+  }
+  .logout-btn:hover { background: #f7931a; color: #000; border-color: #f7931a; }
   h1 { font-size: 24px; margin: 0 0 8px 0; }
   .subtitle { color: #475569; margin-bottom: 20px; font-size: 14px; }
   .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
@@ -19,6 +26,7 @@
 </style>
 </head>
 <body>
+<a class="logout-btn" href="/__logout">Log out →</a>
 <div class="page">
   <h1>100_btc_v2 Bot vs 100% BTC HODL — Full Matrix Analysis (from 2011)</h1>
   <div class="subtitle">
