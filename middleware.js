@@ -118,7 +118,7 @@ function loginPage(error = '') {
 </head>
 <body>
   <div class="card">
-    <div class="logo">BSTR</div>
+    <div class="logo">MESH</div>
     <div class="subtitle">Private access — please log in to continue.</div>
     ${error ? `<div class="error">${error}</div>` : ''}
     <form method="POST" action="/__login">
