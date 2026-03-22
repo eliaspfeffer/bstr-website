@@ -1,105 +1,256 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>100_btc_v2 Matrix Dashboard (from 2011)</title>
-<style>
-  body { font-family: system-ui, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
-  .page { max-width: 1300px; margin: 0 auto; padding: 20px; }
-  .logout-btn {
-    position: fixed; top: 16px; right: 20px; z-index: 999;
-    background: #141414; color: #f0f0f0; border: 1px solid #242424;
-    border-radius: 8px; padding: 8px 16px; font-size: 0.85rem; font-weight: 600;
-    cursor: pointer; text-decoration: none; transition: background 0.15s;
-  }
-  .logout-btn:hover { background: #f7931a; color: #000; border-color: #f7931a; }
-  h1 { font-size: 24px; margin: 0 0 8px 0; }
-  .subtitle { color: #475569; margin-bottom: 20px; font-size: 14px; }
-  .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-  .tab { padding: 10px 20px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer;
-          background: white; font-size: 14px; font-weight: 500; }
-  .tab.active { background: #0f172a; color: white; border-color: #0f172a; }
-  .panel { display: none; }
-  .panel.active { display: block; }
-  iframe { width: 100%; height: 920px; border: 1px solid #e2e8f0; border-radius: 8px; }
-  .disclaimer {
-    margin-top: 40px; padding: 24px 28px;
-    background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px;
-    font-size: 11px; color: #64748b; line-height: 1.6;
-  }
-  .disclaimer h2 {
-    font-size: 11px; font-weight: 700; color: #475569;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    margin: 0 0 12px 0;
-  }
-  .disclaimer h3 {
-    font-size: 11px; font-weight: 700; color: #475569;
-    margin: 14px 0 4px 0;
-  }
-  .disclaimer p { margin: 0 0 6px 0; }
-  .disclaimer .ack {
-    margin-top: 14px; padding-top: 12px;
-    border-top: 1px solid #cbd5e1;
-    font-weight: 600; color: #475569;
-  }
-</style>
-</head>
-<body>
-<a class="logout-btn" href="/__logout">Log out →</a>
-<div class="page">
-  <h1>100_btc_v2 Bot vs 100% BTC HODL — Full Matrix Analysis (from 2011)</h1>
-  <div class="subtitle">
-    Return: Bot wins 86.5% (>3%) | Neutral 9.8% | HODL wins 3.7% &nbsp;|&nbsp;
-    Sharpe: Bot better 95.0% &nbsp;|&nbsp;
-    Sortino: Bot better 88.6%
-  </div>
-  <div class="tabs">
-    <div class="tab active" onclick="show(0)">Return (3-Level)</div>
-    <div class="tab" onclick="show(1)">Sharpe (3-Level)</div>
-    <div class="tab" onclick="show(2)">Sortino (3-Level)</div>
-  </div>
-  <div id="p0" class="panel active"><iframe src="bot_vs_hodl_interactive_from2011.html"></iframe></div>
-  <div id="p1" class="panel"><iframe src="bot_vs_hodl_sharpe_gradient_from2011.html"></iframe></div>
-  <div id="p2" class="panel"><iframe src="bot_vs_hodl_sortino_gradient_from2011.html"></iframe></div>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>100_btc_v2 Matrix Dashboard (from 2011)</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      .page {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .logout-btn {
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        z-index: 999;
+        background: #141414;
+        color: #f0f0f0;
+        border: 1px solid #242424;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+      .logout-btn:hover {
+        background: #f7931a;
+        color: #000;
+        border-color: #f7931a;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 8px 0;
+      }
+      .subtitle {
+        color: #475569;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .tab {
+        padding: 10px 20px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        cursor: pointer;
+        background: white;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .tab.active {
+        background: #0f172a;
+        color: white;
+        border-color: #0f172a;
+      }
+      .panel {
+        display: none;
+      }
+      .panel.active {
+        display: block;
+      }
+      iframe {
+        width: 100%;
+        height: 920px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+      }
+      .disclaimer {
+        margin-top: 40px;
+        padding: 24px 28px;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 11px;
+        color: #64748b;
+        line-height: 1.6;
+      }
+      .disclaimer h2 {
+        font-size: 11px;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 12px 0;
+      }
+      .disclaimer h3 {
+        font-size: 11px;
+        font-weight: 700;
+        color: #475569;
+        margin: 14px 0 4px 0;
+      }
+      .disclaimer p {
+        margin: 0 0 6px 0;
+      }
+      .disclaimer .ack {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid #cbd5e1;
+        font-weight: 600;
+        color: #475569;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="logout-btn" href="/__logout">Log out →</a>
+    <div class="page">
+      <h1>Bot vs 100% BTC HODL — Full Matrix Analysis</h1>
+      <div class="subtitle">
+        Return: Bot wins 86.5% (>3%) | Neutral 9.8% | HODL wins 3.7%
+        &nbsp;|&nbsp; Sharpe: Bot better 95.0% &nbsp;|&nbsp; Sortino: Bot better
+        88.6%
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="show(0)">Return (3-Level)</div>
+        <div class="tab" onclick="show(1)">Sharpe (3-Level)</div>
+        <div class="tab" onclick="show(2)">Sortino (3-Level)</div>
+      </div>
+      <div id="p0" class="panel active">
+        <iframe src="bot_vs_hodl_interactive_from2011.html"></iframe>
+      </div>
+      <div id="p1" class="panel">
+        <iframe src="bot_vs_hodl_sharpe_gradient_from2011.html"></iframe>
+      </div>
+      <div id="p2" class="panel">
+        <iframe src="bot_vs_hodl_sortino_gradient_from2011.html"></iframe>
+      </div>
+    </div>
 
-<div class="disclaimer">
-  <h2>Important Disclaimer — Trading Strategy: Performance &amp; Results</h2>
+    <div class="disclaimer">
+      <h2>
+        Important Disclaimer — Trading Strategy: Performance &amp; Results
+      </h2>
 
-  <h3>1. No Investment Advice</h3>
-  <p>The information contained in the accompanying materials, including but not limited to trading strategy descriptions, historical performance data, simulated or hypothetical results, profit and loss figures, and any related analysis (collectively, the "Materials"), is provided for informational and educational purposes only. Nothing in the Materials constitutes, or should be construed as, investment advice, a recommendation, a solicitation, or an offer to buy or sell any security, financial instrument, or trading strategy.</p>
-  <p>Recipients should not rely on the Materials as a basis for making any investment decision. All investment decisions should be made based on independent analysis and consultation with qualified, licensed financial professionals.</p>
+      <h3>1. No Investment Advice</h3>
+      <p>
+        The information contained in the accompanying materials, including but
+        not limited to trading strategy descriptions, historical performance
+        data, simulated or hypothetical results, profit and loss figures, and
+        any related analysis (collectively, the "Materials"), is provided for
+        informational and educational purposes only. Nothing in the Materials
+        constitutes, or should be construed as, investment advice, a
+        recommendation, a solicitation, or an offer to buy or sell any security,
+        financial instrument, or trading strategy.
+      </p>
+      <p>
+        Recipients should not rely on the Materials as a basis for making any
+        investment decision. All investment decisions should be made based on
+        independent analysis and consultation with qualified, licensed financial
+        professionals.
+      </p>
 
-  <h3>2. No Guarantee of Accuracy</h3>
-  <p>While reasonable efforts have been made to ensure the accuracy and completeness of the data and information presented in the Materials, no representation or warranty, express or implied, is made as to the accuracy, reliability, completeness, or timeliness of any information contained herein.</p>
-  <p>The Materials may contain errors, omissions, or outdated information. Data inputs, market conditions, and computational assumptions may vary, and no assurance can be given that the information has been independently verified.</p>
+      <h3>2. No Guarantee of Accuracy</h3>
+      <p>
+        While reasonable efforts have been made to ensure the accuracy and
+        completeness of the data and information presented in the Materials, no
+        representation or warranty, express or implied, is made as to the
+        accuracy, reliability, completeness, or timeliness of any information
+        contained herein.
+      </p>
+      <p>
+        The Materials may contain errors, omissions, or outdated information.
+        Data inputs, market conditions, and computational assumptions may vary,
+        and no assurance can be given that the information has been
+        independently verified.
+      </p>
 
-  <h3>3. Hypothetical &amp; Past Performance</h3>
-  <p>Any performance data, including historical returns, back-tested results, or hypothetical projections, is presented solely for illustrative purposes. Past performance is not indicative of future results. Hypothetical or simulated results have inherent limitations and do not represent actual trading.</p>
-  <p>Simulated results are generally prepared with the benefit of hindsight. No representation is made that any account will or is likely to achieve profits or losses similar to those shown. Actual results may differ materially from hypothetical projections due to market conditions, liquidity, execution, and other factors.</p>
+      <h3>3. Hypothetical &amp; Past Performance</h3>
+      <p>
+        Any performance data, including historical returns, back-tested results,
+        or hypothetical projections, is presented solely for illustrative
+        purposes. Past performance is not indicative of future results.
+        Hypothetical or simulated results have inherent limitations and do not
+        represent actual trading.
+      </p>
+      <p>
+        Simulated results are generally prepared with the benefit of hindsight.
+        No representation is made that any account will or is likely to achieve
+        profits or losses similar to those shown. Actual results may differ
+        materially from hypothetical projections due to market conditions,
+        liquidity, execution, and other factors.
+      </p>
 
-  <h3>4. Risk of Loss</h3>
-  <p>Trading and investing involve substantial risk of loss, including the potential loss of the entire invested amount. The strategies discussed in the Materials may not be suitable for all investors. Each investor must carefully consider their own financial situation, risk tolerance, and investment objectives before making any investment decisions.</p>
+      <h3>4. Risk of Loss</h3>
+      <p>
+        Trading and investing involve substantial risk of loss, including the
+        potential loss of the entire invested amount. The strategies discussed
+        in the Materials may not be suitable for all investors. Each investor
+        must carefully consider their own financial situation, risk tolerance,
+        and investment objectives before making any investment decisions.
+      </p>
 
-  <h3>5. No Fiduciary Relationship</h3>
-  <p>The provision of these Materials does not create a fiduciary, advisory, or professional relationship between the provider of the Materials and the recipient. The provider assumes no obligation to update, revise, or supplement the Materials at any time.</p>
+      <h3>5. No Fiduciary Relationship</h3>
+      <p>
+        The provision of these Materials does not create a fiduciary, advisory,
+        or professional relationship between the provider of the Materials and
+        the recipient. The provider assumes no obligation to update, revise, or
+        supplement the Materials at any time.
+      </p>
 
-  <h3>6. Limitation of Liability</h3>
-  <p>To the fullest extent permitted by applicable law, the provider of the Materials, its affiliates, officers, directors, employees, and agents shall not be liable for any direct, indirect, incidental, consequential, or special damages arising out of or in connection with the use of, or reliance on, the Materials, including but not limited to loss of profits, trading losses, or loss of data.</p>
+      <h3>6. Limitation of Liability</h3>
+      <p>
+        To the fullest extent permitted by applicable law, the provider of the
+        Materials, its affiliates, officers, directors, employees, and agents
+        shall not be liable for any direct, indirect, incidental, consequential,
+        or special damages arising out of or in connection with the use of, or
+        reliance on, the Materials, including but not limited to loss of
+        profits, trading losses, or loss of data.
+      </p>
 
-  <h3>7. Regulatory Notice</h3>
-  <p>The provider of the Materials is not registered as a broker-dealer, investment adviser, or in any other capacity with the U.S. Securities and Exchange Commission (SEC), the Financial Industry Regulatory Authority (FINRA), the Commodity Futures Trading Commission (CFTC), or any state securities regulatory authority. The Materials are not intended to be distributed in any jurisdiction where such distribution would be contrary to law or regulation.</p>
+      <h3>7. Regulatory Notice</h3>
+      <p>
+        The provider of the Materials is not registered as a broker-dealer,
+        investment adviser, or in any other capacity with the U.S. Securities
+        and Exchange Commission (SEC), the Financial Industry Regulatory
+        Authority (FINRA), the Commodity Futures Trading Commission (CFTC), or
+        any state securities regulatory authority. The Materials are not
+        intended to be distributed in any jurisdiction where such distribution
+        would be contrary to law or regulation.
+      </p>
 
-  <p class="ack">ACKNOWLEDGMENT: By reviewing the accompanying Materials, the recipient acknowledges that they have read, understood, and agreed to the terms of this Disclaimer and that they are not relying on the Materials as investment advice.</p>
-  <p style="margin-top:8px;">This disclaimer is an integral part of the accompanying Materials and must be distributed together with them.</p>
-</div>
+      <p class="ack">
+        ACKNOWLEDGMENT: By reviewing the accompanying Materials, the recipient
+        acknowledges that they have read, understood, and agreed to the terms of
+        this Disclaimer and that they are not relying on the Materials as
+        investment advice.
+      </p>
+      <p style="margin-top: 8px">
+        This disclaimer is an integral part of the accompanying Materials and
+        must be distributed together with them.
+      </p>
+    </div>
 
-<script>
-function show(idx) {
-  document.querySelectorAll('.panel').forEach((p,i) => p.classList.toggle('active', i===idx));
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
-}
-</script>
-</body>
+    <script>
+      function show(idx) {
+        document
+          .querySelectorAll(".panel")
+          .forEach((p, i) => p.classList.toggle("active", i === idx));
+        document
+          .querySelectorAll(".tab")
+          .forEach((t, i) => t.classList.toggle("active", i === idx));
+      }
+    </script>
+  </body>
 </html>
